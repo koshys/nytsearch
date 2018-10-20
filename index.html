@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>The Magical Cat Button</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+// Built by LucyBot. www.lucybot.com
+     
+
+function getResults(searchItem,recCount) {
+    var results = {};
+    var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    url += '?' + $.param({
+        'api-key': "821e64ea25c64a4e8f315018907a18f2",
+        'q': searchItem,
+        'p' : 3 
+    });
+    $.ajax({
+        url: url,
+        method: 'GET',
+    }).done(function(result) {
+
+        // something bad happened        
+        
+        if ( result.status != 'OK') {
+            return results;
+        }        
+
+        for ( var i = 0; i < recCount; i++) {
+            console.log(result.response.docs[i]);
+        }
+    
+        
+    }).fail(function(err) {
+        console.log(err);
+    });
+
+    return results;
+
+}
+
+var x = getResults("climate",1);
+
+</script>
+
+
+
+
+</body>
+
+</body>
+</html>
